@@ -1,0 +1,85 @@
+{% block element_twomoons_slider %}
+
+    {# TODO: @zenit - Check again as soon as Shopware solves the bug in the original code itself. #}
+    {% if not config %}
+        {% set config = element.fieldConfig.elements %}
+    {% endif %}
+
+    {% if not sliderConfig %}
+        {% set sliderConfig = element.fieldConfig.elements %}
+    {% endif %}
+
+    {# ... @zenit - in context of crossselling, they include this template with sliderConfig: config #}
+    {# however, config and sliderConfig are used in the mix. So I set both variables to the same value #}
+    {% if not config and sliderConfig %}
+        {% set config = sliderConfig %}
+    {% endif %}
+
+    {% if not sliderConfig %}
+        {% set sliderConfig = element.fieldConfig.elements %}
+    {% endif %}
+    {% if element.data.products.elements %}
+        <div style="position: relative;">
+            {% block element_twslider_alignment %}
+
+                {% block element_twslider_slider %}
+
+                    {% block element_twslider_title %}
+                        {% if sliderConfig.title.value %}
+                            <div class="cms-element-title">
+                                <p class="cms-element-title-paragraph">{{ sliderConfig.title.value }}</p>
+                            </div>
+                        {% endif %}
+                    {% endblock %}
+                    <div class="twomoons-slider">
+                        <div class="twomoons-slider-wrapper">
+                            {% block element_twslider_inner %}
+                                {% block element_twslider_element %}
+                                        {% for product in element.data.products.elements %}
+                                            {% block element_twslider_inner_item %}
+                                                <div class="slider-item">
+                                                    {% sw_include '@Storefront/storefront/component/product/card/box.html.twig' with {
+                                                        'layout': sliderConfig.boxLayout.value,
+                                                        'displayMode': sliderConfig.displayMode.value
+                                                    } %}
+                                                </div>
+                                            {% endblock %}
+                                        {% endfor %}
+                                {% endblock %}
+                            {% endblock %}
+                        </div>
+
+                        {% block element_twslider_controls %}
+                            {% if ( sliderConfig.navigationmobile.value == false ) %}
+                                {% set mobilehidden = 'hidden-mobile hidden-tablet' %}
+                            {% endif %}
+                            {% if ( sliderConfig.navigation.value == false ) %}
+                                {% set mobilehidden = 'hidden-desktop' %}
+                            {% endif %}
+
+                                <div class="product-slider-controls-container {{mobilehidden}}">
+                                    <div class="base-slider-controls">
+                                        {% block element_twslider_controls_items %}
+                                            <button
+                                                class="base-slider-controls-prev product-slider-controls-prev{% if sliderConfig.border.value %} has-border{% endif %}">
+                                                {% block element_twslider_controls_items_prev_icon %}
+                                                    {% sw_icon 'arrow-head-left' %}
+                                                {% endblock %}
+                                            </button>
+                                            <button
+                                                class="base-slider-controls-next product-slider-controls-next{% if sliderConfig.border.value %} has-border{% endif %}">
+                                                {% block element_twslider_controls_items_next_icon %}
+                                                    {% sw_icon 'arrow-head-right' %}
+                                                {% endblock %}
+                                            </button>
+                                        {% endblock %}
+                                    </div>
+                                </div>
+                        {% endblock %}
+                    </div>
+                
+                {% endblock %}
+            {% endblock %}
+        </div>
+    {% endif %}
+{% endblock %}

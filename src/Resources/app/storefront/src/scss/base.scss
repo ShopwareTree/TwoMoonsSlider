@@ -1,0 +1,35 @@
+.twomoons-slider-wrapper:active { 
+    cursor: grabbing;
+    cursor: -webkit-grabbing; 
+    cursor:-moz-grabbing;
+}
+
+.twomoons-slider-wrapper {
+    --scrollbar-border-width: 11px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--scrollbar-color, 60 60 60)) transparent;
+    scroll-behavior: smooth;
+    display: grid;
+    grid-auto-flow: column;
+    cursor: -webkit-grab; 
+    cursor:-moz-grab; 
+    -webkit-user-select: none;
+    user-select: none;
+    transition: none 0s ease 0s;
+    will-change: transform;
+    position: relative;
+
+    @media (max-width: 768px) {
+        grid-auto-columns: 200px;
+    }
+    @media (min-width: 768px) {
+         grid-auto-columns: 250px;
+    }
+}
+
+.twomoons-slider-wrapper .slider-item {
+    padding: 5px;
+}

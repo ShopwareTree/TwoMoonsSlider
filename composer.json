@@ -1,0 +1,19 @@
+{
+  "name": "twomoons/twomoons-slider",
+  "description": "TwoMoons Custom Plugin",
+  "version": "3.0.0",
+  "type": "shopware-platform-plugin",
+  "license": "proprietary",
+  "autoload": {
+    "psr-4": {
+      "TwoMoons\\": "src/"
+    }
+  },
+  "extra": {
+    "shopware-plugin-class": "TwoMoons\\TwoMoonsSlider",
+    "label": {
+      "de-DE": "TwoMoons Slider",
+      "en-GB": "TwoMoons Slider EN"
+    }
+  }
+}
