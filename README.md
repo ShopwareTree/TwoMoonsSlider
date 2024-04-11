@@ -16,7 +16,7 @@ In the base.scss it's fixed like this.
 - Working with 6.5.8.7
 
 # License
-Free to use for non commercial use (don't sell a copy of it) - please  add a backlink to twomoons.ch on your site =)
+Free to use (except resale) (don't sell a copy of it) - please  add a backlink to twomoons.ch on your site =)
 example:
 
 <a href="https://www.twomoons.ch/magic-the-gathering/" target="_self">Magic the Gathering Shop Schweiz</a>
