@@ -1,32 +1,71 @@
-.twomoons-slider-wrapper:active { 
+.twomoons-slider-wrapper-scroll:active { 
     cursor: grabbing;
     cursor: -webkit-grabbing; 
     cursor:-moz-grabbing;
 }
 
-.twomoons-slider-wrapper {
-    --scrollbar-border-width: 11px;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: thin;
-    scrollbar-color: rgb(var(--scrollbar-color, 60 60 60)) transparent;
-    scroll-behavior: smooth;
-    display: grid;
-    grid-auto-flow: column;
-    cursor: -webkit-grab; 
-    cursor:-moz-grab; 
-    -webkit-user-select: none;
-    user-select: none;
-    transition: none 0s ease 0s;
-    will-change: transform;
-    position: relative;
+@media (max-width: 768px) {
+    .twomoons-slider-wrapper-scroll, .twomoons-slider-wrapper-desktop {
+        --scrollbar-border-width: 11px;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: thin;
+        scrollbar-color: rgb(var(--scrollbar-color, 60 60 60)) transparent;
+        scroll-behavior: smooth;
+        display: grid;
+        grid-auto-flow: column;
+        cursor: -webkit-grab; 
+        cursor:-moz-grab; 
+        -webkit-user-select: none;
+        user-select: none;
+        transition: none 0s ease 0s;
+        will-change: transform;
+        position: relative;
 
-    @media (max-width: 768px) {
         grid-auto-columns: 200px;
     }
-    @media (min-width: 768px) {
-         grid-auto-columns: 250px;
+    .twomoons-slider-wrapper-desktop:active { 
+        cursor: grabbing;
+        cursor: -webkit-grabbing; 
+        cursor:-moz-grabbing;
+    }
+}
+
+@media (min-width: 768px) {
+    .twomoons-slider-wrapper-desktop {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+
+        @media (min-width: 992px) {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        @media (min-width: 1200px) {
+            grid-template-columns: repeat(5, 1fr);
+        }
+        
+        column-gap: 5px;
+    }
+
+    .twomoons-slider-wrapper-scroll {
+        display: grid;
+        --scrollbar-border-width: 11px;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: thin;
+        scrollbar-color: rgb(var(--scrollbar-color, 60 60 60)) transparent;
+        scroll-behavior: smooth;
+        grid-auto-flow: column;
+        cursor: -webkit-grab; 
+        cursor:-moz-grab; 
+        -webkit-user-select: none;
+        user-select: none;
+        transition: none 0s ease 0s;
+        will-change: transform;
+        position: relative;
+
+        grid-auto-columns: 200px;
     }
 }
 

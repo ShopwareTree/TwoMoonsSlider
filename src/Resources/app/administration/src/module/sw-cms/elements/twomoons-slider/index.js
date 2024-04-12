@@ -42,6 +42,10 @@ Shopware.Service('cmsService').registerCmsElement({
             source: 'static',
             value: '',
         },
+        desktopNoSlider: {
+            source: 'static',
+            value: false,
+        },
         displayMode: {
             source: 'static',
             value: 'standard',

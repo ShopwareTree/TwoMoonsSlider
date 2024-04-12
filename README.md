@@ -15,6 +15,10 @@ In the base.scss it's fixed like this.
 ## Shopware Versions Tested
 - Working with 6.5.8.7
 
+## Version Changes
+### 4.0.0
+- Added option to display the grid on the desktop and not only the slider
+
 # License
 Free to use (except resale) (don't sell a copy of it) - please  add a backlink to twomoons.ch on your site =)
 example:

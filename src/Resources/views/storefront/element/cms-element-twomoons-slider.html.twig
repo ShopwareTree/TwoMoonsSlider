@@ -31,8 +31,16 @@
                             </div>
                         {% endif %}
                     {% endblock %}
+
+                    {% if ( sliderConfig.desktopNoSlider.value == true ) %}
+                        {% set css_class = 'twomoons-slider-wrapper-desktop' %}
+                        {% else %}
+                        {% set css_class = 'twomoons-slider-wrapper-scroll' %}
+                    {% endif %}
+
+                    
                     <div class="twomoons-slider">
-                        <div class="twomoons-slider-wrapper">
+                        <div class="{{css_class}}">
                             {% block element_twslider_inner %}
                                 {% block element_twslider_element %}
                                         {% for product in element.data.products.elements %}
@@ -51,10 +59,10 @@
 
                         {% block element_twslider_controls %}
                             {% if ( sliderConfig.navigationmobile.value == false ) %}
-                                {% set mobilehidden = 'hidden-mobile hidden-tablet' %}
+                                {% set mobilehidden = 'hidden-mobile hidden-tablet ' %}
                             {% endif %}
                             {% if ( sliderConfig.navigation.value == false ) %}
-                                {% set mobilehidden = 'hidden-desktop' %}
+                                {% set mobilehidden = mobilehidden ~ 'hidden-desktop' %}
                             {% endif %}
 
                                 <div class="product-slider-controls-container {{mobilehidden}}">

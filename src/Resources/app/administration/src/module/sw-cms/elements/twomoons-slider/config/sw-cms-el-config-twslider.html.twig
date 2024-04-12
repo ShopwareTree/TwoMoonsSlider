@@ -344,6 +344,22 @@
                             :label="'Navigation Mobile'"
                         />
                     {% endblock %}
+
+
+                    <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+                    {% block sw_cms_element_twslider_config_settings_desktop_no_slider %}
+                        <sw-switch-field
+                            {% if VUE3 %}
+                            v-model:value="element.config.desktopNoSlider.value"
+                            {% else %}
+                            v-model="element.config.desktopNoSlider.value"
+                            {% endif %}
+                            bordered
+                            :label="'Show No Slider on Desktop'"
+                        />
+                        {% endblock %}
+
+                        
                 </sw-container>
                 {% endblock %}
             </template>

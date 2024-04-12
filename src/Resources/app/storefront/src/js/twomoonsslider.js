@@ -8,57 +8,62 @@ export default class TwoMoonsSlider extends Plugin {
         /* gets the first item with the query selector */
         const prevBtn = this.el.querySelector('.base-slider-controls-prev');
         const nextBtn = this.el.querySelector('.base-slider-controls-next');
-        const tmsw = this.el.querySelector('.twomoons-slider-wrapper');
+        let tmsw = this.el.querySelector('.twomoons-slider-wrapper-scroll');
         
+        if (!tmsw) {
+            tmsw = this.el.querySelector('.twomoons-slider-wrapper-desktop');
+        }
+
         let isDown = false;
         let startX;
         let scrollLeft;
-        tmsw.addEventListener('mousedown', (e) => {
-            isDown = true;
-            tmsw.classList.add('active');
-            startX = e.pageX - tmsw.offsetLeft;
-            scrollLeft = tmsw.scrollLeft;
-        });
-        /*this.el.addEventListener('mouseleave', () => {
-            isDown = false;
-            this.el.classList.remove('active');
-            console.log("mouseleave");
-        });*/
-        document.addEventListener('mouseup', (e) => {
-            isDown = false;
-            tmsw.classList.remove('active');
-        });
-
-        tmsw.addEventListener('mouseup', () => {
-            isDown = false;
-            tmsw.classList.remove('active');
-        });
-
-        const links = document.querySelectorAll('a');
-            links.forEach(element => {element.addEventListener('mousedown',function(e) { 
-                e.preventDefault();
+        if (tmsw) {
+            tmsw.addEventListener('mousedown', (e) => {
+                isDown = true;
+                tmsw.classList.add('active');
+                startX = e.pageX - tmsw.offsetLeft;
+                scrollLeft = tmsw.scrollLeft;
             });
-        });
-
-        tmsw.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - tmsw.offsetLeft;
-            const walk = (x - startX)*3; // The number 3 determines the sensitivity of the drag
-            tmsw.scrollLeft = scrollLeft - walk;
-        });
-
-        prevBtn.addEventListener('click', () => {
-            // Assuming all items have the same width
-            const itemWidth = this.el.querySelector('.slider-item').clientWidth;
-            tmsw.scrollBy({ left: -itemWidth, top: 0, behavior: 'smooth' });
-        });
+            /*this.el.addEventListener('mouseleave', () => {
+                isDown = false;
+                this.el.classList.remove('active');
+                console.log("mouseleave");
+            });*/
+            document.addEventListener('mouseup', (e) => {
+                isDown = false;
+                tmsw.classList.remove('active');
+            });
     
-        nextBtn.addEventListener('click', () => {
-            const itemWidth = this.el.querySelector('.slider-item').clientWidth;
-            tmsw.scrollBy({ left: itemWidth, top: 0, behavior: 'smooth' });
-        });
-
+            tmsw.addEventListener('mouseup', () => {
+                isDown = false;
+                tmsw.classList.remove('active');
+            });
+    
+            const links = document.querySelectorAll('a');
+                links.forEach(element => {element.addEventListener('mousedown',function(e) { 
+                    e.preventDefault();
+                });
+            });
+    
+            tmsw.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - tmsw.offsetLeft;
+                const walk = (x - startX)*3; // The number 3 determines the sensitivity of the drag
+                tmsw.scrollLeft = scrollLeft - walk;
+            });
+    
+            prevBtn.addEventListener('click', () => {
+                // Assuming all items have the same width
+                const itemWidth = this.el.querySelector('.slider-item').clientWidth;
+                tmsw.scrollBy({ left: -itemWidth, top: 0, behavior: 'smooth' });
+            });
+        
+            nextBtn.addEventListener('click', () => {
+                const itemWidth = this.el.querySelector('.slider-item').clientWidth;
+                tmsw.scrollBy({ left: itemWidth, top: 0, behavior: 'smooth' });
+            });
+        };
     }
 }
 
