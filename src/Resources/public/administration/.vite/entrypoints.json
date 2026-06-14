@@ -1,0 +1,27 @@
+{
+  "base": "/bundles/twomoonsslider/administration/",
+  "entryPoints": {
+    "two-moons-slider": {
+      "css": [],
+      "dynamic": [
+        "/bundles/twomoonsslider/administration/assets/index-Chkm7QpC.js",
+        "/bundles/twomoonsslider/administration/assets/index-DONG2EdP.js",
+        "/bundles/twomoonsslider/administration/assets/index-E3NxAvT3.js"
+      ],
+      "js": [
+        "/bundles/twomoonsslider/administration/assets/two-moons-slider-BJeedNzN.js"
+      ],
+      "legacy": false,
+      "preload": []
+    }
+  },
+  "legacy": false,
+  "metadatas": {},
+  "version": [
+    "7.1.0",
+    7,
+    1,
+    0
+  ],
+  "viteServer": null
+}

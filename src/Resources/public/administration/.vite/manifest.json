@@ -1,0 +1,40 @@
+{
+  "main.js": {
+    "file": "assets/two-moons-slider-BJeedNzN.js",
+    "name": "two-moons-slider",
+    "src": "main.js",
+    "isEntry": true,
+    "dynamicImports": [
+      "module/sw-cms/elements/twomoons-slider/preview/index.js",
+      "module/sw-cms/elements/twomoons-slider/config/index.js",
+      "module/sw-cms/elements/twomoons-slider/component/index.js"
+    ]
+  },
+  "module/sw-cms/elements/twomoons-slider/component/index.js": {
+    "file": "assets/index-E3NxAvT3.js",
+    "name": "index",
+    "src": "module/sw-cms/elements/twomoons-slider/component/index.js",
+    "isDynamicEntry": true,
+    "css": [
+      "assets/index-DUqHX9NL.css"
+    ]
+  },
+  "module/sw-cms/elements/twomoons-slider/config/index.js": {
+    "file": "assets/index-DONG2EdP.js",
+    "name": "index",
+    "src": "module/sw-cms/elements/twomoons-slider/config/index.js",
+    "isDynamicEntry": true,
+    "css": [
+      "assets/index-C0lwaHg6.css"
+    ]
+  },
+  "module/sw-cms/elements/twomoons-slider/preview/index.js": {
+    "file": "assets/index-Chkm7QpC.js",
+    "name": "index",
+    "src": "module/sw-cms/elements/twomoons-slider/preview/index.js",
+    "isDynamicEntry": true,
+    "css": [
+      "assets/index-DThoWTjC.css"
+    ]
+  }
+}

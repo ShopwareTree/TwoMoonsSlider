@@ -13,9 +13,11 @@ In the base.scss it's fixed like this.
 ```
 
 ## Shopware Versions Tested
-- Working with 6.5.8.7
+- Working with 6.7.10.2
 
 ## Version Changes
+### 5.0.0
+Changes for Shopware 6.7+
 ### 4.0.0
 - Added option to display the grid on the desktop and not only the slider
 

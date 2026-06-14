@@ -62,67 +62,75 @@ export default {
         },
 
         productAssignmentTypes() {
-            return [{
-                label: this.$tc('sw-cms.elements.productSlider.config.productAssignmentTypeOptions.manual'),
-                value: 'static',
-            }, {
-                label: this.$tc('sw-cms.elements.productSlider.config.productAssignmentTypeOptions.productStream'),
-                value: 'product_stream',
-            }];
+            return this.getProductAssignmentTypes();
         },
 
         productStreamSortingOptions() {
-            return [{
-                label: this.$tc('sw-cms.elements.productSlider.config.productStreamSortingOptions.nameAsc'),
-                value: 'name:ASC',
-            }, {
-                label: this.$tc('sw-cms.elements.productSlider.config.productStreamSortingOptions.nameDesc'),
-                value: 'name:DESC',
-            }, {
-                label: this.$tc('sw-cms.elements.productSlider.config.productStreamSortingOptions.creationDateAsc'),
-                value: 'createdAt:ASC',
-            }, {
-                label: this.$tc('sw-cms.elements.productSlider.config.productStreamSortingOptions.creationDateDesc'),
-                value: 'createdAt:DESC',
-            }, {
-                label: this.$tc('sw-cms.elements.productSlider.config.productStreamSortingOptions.random'),
-                value: 'random',
-            }, {
-                label: this.$tc('sw-cms.elements.productSlider.config.productStreamSortingOptions.priceAsc'),
-                value: 'cheapestPrice:ASC',
-            }, {
-                label: this.$tc('sw-cms.elements.productSlider.config.productStreamSortingOptions.priceDesc'),
-                value: 'cheapestPrice:DESC',
-            }];
+            return this.getProductStreamSortingOptions();
         },
 
         productStreamCriteria() {
-            const criteria = new Criteria(1, 10);
-            const sorting = this.element.config.productStreamSorting.value;
-
-            if (!sorting || sorting === 'random') {
-                return criteria;
-            }
-
-            const field = sorting.split(':')[0];
-            const direction = sorting.split(':')[1];
-
-            criteria.addSorting(Criteria.sort(field, direction, false));
-
+            const criteria = new Criteria();
+            criteria.addFilter(Criteria.equals('internal', false));
             return criteria;
         },
 
-        productStreamPreviewColumns() {
+        displayModeOptions() {
             return [
                 {
-                    property: 'name',
-                    label: this.$tc('sw-category.base.products.columnNameLabel'),
-                    dataIndex: 'name',
-                    sortable: false,
-                }, {
-                    property: 'manufacturer.name',
-                    label: this.$tc('sw-category.base.products.columnManufacturerLabel'),
-                    sortable: false,
+                    id: 1,
+                    value: 'standard',
+                    label: this.$t('sw-cms.elements.general.config.label.displayModeStandard'),
+                },
+                {
+                    id: 2,
+                    value: 'cover',
+                    label: this.$t('sw-cms.elements.general.config.label.displayModeCover'),
+                },
+                {
+                    id: 3,
+                    value: 'contain',
+                    label: this.$t('sw-cms.elements.general.config.label.displayModeContain'),
+                },
+            ];
+        },
+
+        verticalAlignOptions() {
+            return [
+                {
+                    id: 1,
+                    value: 'flex-start',
+                    label: this.$t('sw-cms.elements.general.config.label.verticalAlignTop'),
+                },
+                {
+                    id: 2,
+                    value: 'center',
+                    label: this.$t('sw-cms.elements.general.config.label.verticalAlignCenter'),
+                },
+                {
+                    id: 3,
+                    value: 'flex-end',
+                    label: this.$t('sw-cms.elements.general.config.label.verticalAlignBottom'),
+                },
+            ];
+        },
+
+        boxLayoutOptions() {
+            return [
+                {
+                    id: 1,
+                    value: 'standard',
+                    label: this.$t('sw-cms.elements.productBox.config.label.layoutTypeStandard'),
+                },
+                {
+                    id: 2,
+                    value: 'image',
+                    label: this.$t('sw-cms.elements.productBox.config.label.layoutTypeImage'),
+                },
+                {
+                    id: 3,
+                    value: 'minimal',
+                    label: this.$t('sw-cms.elements.productBox.config.label.layoutTypeMinimal'),
                 },
             ];
         },
@@ -145,19 +153,66 @@ export default {
             if (this.element.config.products.source === 'product_stream') {
                 this.loadProductStream();
             } else {
-                // We have to fetch the assigned entities again
-                // ToDo: Fix with NEXT-4830
-                const criteria = new Criteria(1, 100);
-                criteria.addAssociation('cover');
-                criteria.addAssociation('options.group');
-                criteria.setIds(this.element.config.products.value);
-
-                this.productRepository
-                    .search(criteria, { ...Shopware.Context.api, inheritance: true })
-                    .then((result) => {
-                        this.productCollection = result;
-                    });
+                this.loadManualAssignment();
             }
+        },
+
+        async loadManualAssignment() {
+            const criteria = new Criteria(1, 100);
+            criteria.addAssociation('cover');
+            criteria.addAssociation('options.group');
+            criteria.setIds(this.element.config.products.value);
+
+            this.productCollection = await this.productRepository.search(criteria, {
+                ...Shopware.Context.api,
+                inheritance: true,
+            });
+        },
+
+        getProductAssignmentTypes() {
+            return [
+                {
+                    label: this.$t('sw-cms.elements.productSlider.config.productAssignmentTypeOptions.manual'),
+                    value: 'static',
+                },
+                {
+                    label: this.$t('sw-cms.elements.productSlider.config.productAssignmentTypeOptions.productStream'),
+                    value: 'product_stream',
+                },
+            ];
+        },
+
+        getProductStreamSortingOptions() {
+            return [
+                {
+                    label: this.$t('sw-cms.elements.productSlider.config.productStreamSortingOptions.nameAsc'),
+                    value: 'name:ASC',
+                },
+                {
+                    label: this.$t('sw-cms.elements.productSlider.config.productStreamSortingOptions.nameDesc'),
+                    value: 'name:DESC',
+                },
+                {
+                    label: this.$t('sw-cms.elements.productSlider.config.productStreamSortingOptions.creationDateAsc'),
+                    value: 'createdAt:ASC',
+                },
+                {
+                    label: this.$t('sw-cms.elements.productSlider.config.productStreamSortingOptions.creationDateDesc'),
+                    value: 'createdAt:DESC',
+                },
+                {
+                    label: this.$t('sw-cms.elements.productSlider.config.productStreamSortingOptions.priceAsc'),
+                    value: 'cheapestPrice:ASC',
+                },
+                {
+                    label: this.$t('sw-cms.elements.productSlider.config.productStreamSortingOptions.priceDesc'),
+                    value: 'cheapestPrice:DESC',
+                },
+                {
+                    label: this.$t('sw-cms.elements.productSlider.config.productStreamSortingOptions.random'),
+                    value: 'random',
+                },
+            ];
         },
 
         onChangeAssignmentType(type) {
@@ -170,12 +225,12 @@ export default {
             }
         },
 
-        loadProductStream() {
-            this.productStreamRepository
-                .get(this.element.config.products.value, Shopware.Context.api, new Criteria(1, 25))
-                .then((result) => {
-                    this.productStream = result;
-                });
+        async loadProductStream() {
+            this.productStream = await this.productStreamRepository.get(
+                this.element.config.products.value,
+                Shopware.Context.api,
+                new Criteria(1, 25),
+            );
         },
 
         onChangeProductStream(streamId) {
@@ -206,7 +261,7 @@ export default {
                 return;
             }
 
-            this.$set(this.element.data, 'products', this.productCollection);
+            this.element.data.products = this.productCollection;
         },
 
         isSelected(itemId) {
